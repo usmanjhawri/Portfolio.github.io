@@ -2,7 +2,7 @@
 
 This is a static portfolio website built with plain HTML, CSS, and JavaScript.
 
-There is no framework, build tool, server, or database. Netlify can host the site directly from the repository.
+There is no framework, server, or database. Netlify runs one small build script that prepares the image files and the CV PDF for hosting.
 
 ## Local Preview
 
@@ -26,9 +26,8 @@ Most routine edits happen in `projects.js`.
 
 - Update `portfolioData.profile` for headline, contact details, and summary.
 - Update `portfolioData.projects` to add, remove, or reorder projects.
-- Project image data is kept in `image-data/`.
-- CV download data is kept in `cv-data/cv.js`. The website offers only the CV as a download.
-- To replace the CV or project images, ask Codex to update them from the source files.
+- Project image paths point to `assets/project-images/site/`.
+- The downloadable CV path is `assets/downloads/Muhammad_Usman_Yousaf_CV.pdf`. The website currently offers only the CV as a download.
 - For each project, keep `summary`, `role`, `quickScan`, `metrics`, `facts`, `caseStudy`, and `tools` complete.
 - The `caseStudy` object controls the detailed popup content: challenge, contribution, design decisions, deliverables, validation, and outcome.
 
@@ -36,8 +35,8 @@ Most routine edits happen in `projects.js`.
 
 Netlify settings are configured in `netlify.toml`.
 
-- Build command: leave empty
-- Publish directory: `.`
+- Build command: `node scripts/build-site.js`
+- Publish directory: `dist`
 - Environment variables: none required
 - Production branch: `main`
 

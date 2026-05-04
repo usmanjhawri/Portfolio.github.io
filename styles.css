@@ -106,7 +106,9 @@ a {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: radial-gradient(circle at 78% 28%, rgba(217, 166, 63, 0.34), transparent 28%), linear-gradient(135deg, #111513 0%, #1f2624 52%, #3d4b47 100%);
+  background-image: url("assets/project-images/site/soil-sampling-ugv.webp");
+  background-size: cover;
+  background-position: center;
   transform: scale(1.02);
 }
 
@@ -218,6 +220,7 @@ h1 {
 }
 
 .intro-band,
+.skills-band,
 .process-band,
 .capability-band,
 .contact-band,
@@ -254,6 +257,7 @@ h1 {
 .contact-band p,
 .project-body p,
 .timeline p,
+.credential-card p,
 .capability-grid p {
   color: var(--muted);
   line-height: 1.7;
@@ -287,6 +291,86 @@ h1 {
   display: block;
   margin-top: 12px;
   color: var(--muted);
+}
+
+.skills-band {
+  background: #f7f4ee;
+}
+
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.credential-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  min-height: 136px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  box-shadow: 0 10px 30px rgba(50, 46, 39, 0.07);
+}
+
+.credential-card > strong {
+  display: inline-grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  color: white;
+  background: var(--teal);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.credential-card h3,
+.skill-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+}
+
+.credential-card p {
+  margin: 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.skill-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 210px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.skill-list span {
+  border: 1px solid #d9cbb9;
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: #4f4b44;
+  background: #fbf8f1;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .process-band {
@@ -799,6 +883,7 @@ h1 {
 @media (max-width: 1120px) {
   .project-grid,
   .capability-grid,
+  .skills-grid,
   .process-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -819,6 +904,7 @@ h1 {
 @media (max-width: 760px) {
   .site-header,
   .intro-band,
+  .credentials-grid,
   .featured-card,
   .project-toolbar,
   .contact-band,
@@ -849,11 +935,70 @@ h1 {
   }
 
   .hero-media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    background: radial-gradient(circle at 78% 28%, rgba(217, 166, 63, 0.34), transparent 28%), linear-gradient(135deg, #111513 0%, #1f2624 52%, #3d4b47 100%);
-    transform: scale(1.02);
+    background-position: 58% center;
+  }
+
+  .hero-actions,
+  .contact-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .project-grid,
+  .capability-grid,
+  .skills-grid,
+  .process-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-image {
+    min-height: 260px;
+  }
+
+  .project-count {
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .stat-item,
+  .stat-item:nth-child(2) {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat-item:last-child {
+    border-bottom: 0;
+  }
+
+  .dialog-visual {
+    position: relative;
+    min-height: auto;
+  }
+
+  .dialog-visual .metric-strip {
+    position: static;
+    margin: 0;
+    border-right: 0;
+    border-left: 0;
+  }
+
+  .dialog-image {
+    height: 280px;
+    min-height: 0;
+    max-height: none;
+  }
+
+  .dialog-copy {
+    max-height: none;
   }
 }
 

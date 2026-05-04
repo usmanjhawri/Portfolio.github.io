@@ -14,13 +14,13 @@ const portfolioData = {
     proofPoints: [
       "Released 120+ parts and assemblies and 100+ engineering drawings across electromechanical product programs.",
       "Owned UGV, service robot, UAV, drivetrain, and CAD automation work from concept through build support.",
-      "Strong in SOLIDWORKS, Inventor automation, FEA, CFD, MATLAB/Simulink, GD&T, DFM/DFA, and supplier handoff."
+      "CSWP and CSWA certified, with strong SOLIDWORKS, Inventor automation, FEA, CFD, MATLAB/Simulink, GD&T, DFM/DFA, and supplier handoff."
     ]
   },
   downloads: [
     {
       label: "Download CV",
-      href: "data:application/pdf;base64," + window.cvChunks.join(""),
+      href: "assets/downloads/Muhammad_Usman_Yousaf_CV.pdf",
       download: "Muhammad_Usman_Yousaf_CV.pdf"
     }
   ],
@@ -29,6 +29,40 @@ const portfolioData = {
     { value: "TRL 1-9", label: "concept to fielded hardware" },
     { value: "100+", label: "released drawings" },
     { value: "80+", label: "CAD/CAE studies and analyses" }
+  ],
+  certifications: [
+    {
+      name: "CSWP",
+      label: "Certified SOLIDWORKS Professional",
+      detail: "Professional-level SOLIDWORKS part, assembly, drawing, and design-intent competency."
+    },
+    {
+      name: "CSWA",
+      label: "Certified SOLIDWORKS Associate",
+      detail: "Validated foundation in SOLIDWORKS modeling workflows, assemblies, and engineering documentation."
+    }
+  ],
+  skillGroups: [
+    {
+      title: "CAD and automation",
+      items: ["SOLIDWORKS", "Autodesk Inventor", "iLogic / VBA", "Creo Parametric", "Fusion 360", "Solid Edge", "Geometric Design X"]
+    },
+    {
+      title: "Mechanical design",
+      items: ["Machine design", "Mechanism design", "Structural design", "Assembly design", "Electromechanical packaging", "GD&T", "Tolerance analysis"]
+    },
+    {
+      title: "Simulation and validation",
+      items: ["FEA", "CFD", "ANSYS", "COMSOL", "Fluent", "ICEM", "MSC ADAMS", "MATLAB/Simulink", "Topology studies"]
+    },
+    {
+      title: "Manufacturing release",
+      items: ["Engineering drawings", "BOMs", "DFM/DFA", "DFMEA", "3D printing", "Prototype builds", "Supplier coordination", "Root-cause troubleshooting"]
+    },
+    {
+      title: "Robotics and UAV systems",
+      items: ["UGV platforms", "UAV mechanisms", "Service robots", "Payload mounting", "Drivetrains", "Landing gear", "Field-test iteration"]
+    }
   ],
   filters: [
     { id: "all", label: "All" },
@@ -66,7 +100,7 @@ const portfolioData = {
       eyebrow: "Agricultural field robot",
       category: "robotics",
       featured: true,
-      image: window.projectImages["soil-sampling-ugv"],
+      image: "assets/project-images/site/soil-sampling-ugv.webp",
       imageAlt: "Soil-sampling UGV CAD and manufactured prototype views",
       summary:
         "UGV-mounted soil collection hardware with rotating tool concepts, pneumatic insertion and retrieval, manufacturable mounting interfaces, service access, and field-driven iteration.",
@@ -113,7 +147,7 @@ const portfolioData = {
       title: "Autonomous Fire-Fighting UGV",
       eyebrow: "Rugged UGV payload integration",
       category: "robotics",
-      image: window.projectImages["fire-fighting-ugv"],
+      image: "assets/project-images/site/fire-fighting-ugv.webp",
       imageAlt: "Fire-fighting UGV CAD views",
       summary:
         "Rugged UGV platform work covering chassis architecture, payload mounting, sensor mast, covers, access panels, electronics space, fabrication handoff, and assembly follow-up.",
@@ -160,7 +194,7 @@ const portfolioData = {
       title: "UGO Autonomous Robot Platform",
       eyebrow: "Modular service robot family",
       category: "robotics",
-      image: window.projectImages["ugo-platform"],
+      image: "assets/project-images/site/ugo-platform.webp",
       imageAlt: "UGO robot platform variants and manufactured product views",
       summary:
         "Modular autonomous service robot platform with a universal mobility base, structural interfaces, brackets, enclosures, module-ready assemblies, manufacturing drawings, and BOM support.",
@@ -207,7 +241,7 @@ const portfolioData = {
       title: "Compact Hazardous-Environment UGV",
       eyebrow: "Constrained autonomous platform",
       category: "robotics",
-      image: window.projectImages["compact-ugv"],
+      image: "assets/project-images/site/compact-ugv.webp",
       imageAlt: "Compact autonomous UGV CAD and prototype build views",
       summary:
         "Compact autonomous UGV packaging with low-clearance chassis constraints, protected payload envelope, wheel layout, cover/interface design, electronics access, and prototype integration support.",
@@ -254,7 +288,7 @@ const portfolioData = {
       title: "ZenaDrone 2000 UAV Mechanisms",
       eyebrow: "VTOL and propulsion hardware",
       category: "uav",
-      image: window.projectImages["zenadrone-2000"],
+      image: "assets/project-images/site/zenadrone-2000.webp",
       imageAlt: "UAV folding arm and tilt mechanism CAD studies",
       summary:
         "UAV mechanism development across variable-pitch propulsion, VTOL/tilt concepts, retractable landing gear, folding architectures, CFD/FEA studies, BOMs, drawings, and build documentation.",
@@ -301,7 +335,7 @@ const portfolioData = {
       title: "Dragonfly-Inspired Flapping-Wing MAV",
       eyebrow: "Bio-inspired micro air vehicle",
       category: "uav",
-      image: window.projectImages["dragonfly-mav"],
+      image: "assets/project-images/site/dragonfly-mav.webp",
       imageAlt: "Dragonfly wing structure and simulation views",
       summary:
         "Bio-inspired flapping-wing MAV mechanical design, wing flexibility studies, aerodynamic analysis, prototype generations, bench testing, and research validation.",
@@ -348,7 +382,7 @@ const portfolioData = {
       title: "Halifax Fan CAD Automation",
       eyebrow: "Quote-to-manufacture workflow",
       category: "automation",
-      image: window.projectImages["halifax-fan"],
+      image: "assets/project-images/site/halifax-fan.webp",
       imageAlt: "Engineering analysis and CAD automation visual",
       summary:
         "Parameterized Autodesk Inventor and iLogic/VBA automation to generate configurable industrial fan assemblies, provisional drawings, and design data for quote-to-manufacture workflows.",
@@ -395,7 +429,7 @@ const portfolioData = {
       title: "MYPRID Hybrid-Electric Three-Wheeler",
       eyebrow: "Vehicle drivetrain and packaging",
       category: "vehicle",
-      image: window.projectImages["myprid-three-wheeler"],
+      image: "assets/project-images/site/myprid-three-wheeler.webp",
       imageAlt: "Hybrid-electric three-wheeler drivetrain CAD assembly",
       summary:
         "Hybrid-electric three-wheeler R&D covering power-split drivetrain architecture, MATLAB/Simulink sizing, vehicle packaging, fabrication coordination, procurement, and prototype validation.",

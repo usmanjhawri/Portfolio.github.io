@@ -1,17 +1,17 @@
 # GitHub and Netlify Workflow
 
-This website is a plain static site. It uses HTML, CSS, JavaScript, project image data, and a CV download. There is no React, Next.js, Vite, Astro, database, or server.
+This website is a plain static site. It uses HTML, CSS, JavaScript, images, and one CV PDF. There is no React, Next.js, Vite, Astro, database, or server.
 
 ## Netlify Build Settings
 
 These settings are stored in `netlify.toml`.
 
-- Build command: leave empty
-- Publish directory: `.`
+- Build command: `node scripts/build-site.js`
+- Publish directory: `dist`
 - Environment variables: none required
 - Production branch: `main`
 
-Because the site is plain HTML/CSS/JS, Netlify only needs to copy the files and host them.
+Netlify runs the small build script to prepare normal image files and the original CV PDF, then hosts the generated `dist` folder.
 
 ## How GitHub Connects to Netlify
 
@@ -46,8 +46,9 @@ GitHub runs a small check on every pull request using `.github/workflows/site-ch
 It checks:
 
 - JavaScript syntax
-- Project image data
-- CV download data
+- Project image paths
+- CV path
+- That only the CV is published as a downloadable file
 
 The pull request also uses `.github/pull_request_template.md` so every change includes a summary, files changed, testing notes, and Netlify setup notes.
 
@@ -57,8 +58,8 @@ The pull request also uses `.github/pull_request_template.md` so every change in
 - Project content: `projects.js`
 - Styling and layout: `styles.css`
 - Interactions such as search and popups: `script.js`
-- Project image data: `image-data/`
-- CV download data: `cv-data/cv.js`
+- Generated web images: `assets/project-images/site/`
+- Downloadable CV: `assets/downloads/Muhammad_Usman_Yousaf_CV.pdf`
 
 Most routine updates should be made in `projects.js`.
 
@@ -88,6 +89,6 @@ http://127.0.0.1:4173
 - Project images load.
 - Search and filters work.
 - Project popups open and close.
-- The CV download button works.
+- The CV button opens the original CV format.
 - The Netlify deploy preview looks correct on desktop and mobile.
 - The GitHub checks pass.
