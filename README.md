@@ -1,20 +1,12 @@
 # Muhammad Usman Yousaf Portfolio Website
 
-This repository contains Muhammad Usman Yousaf's portfolio website.
+This is a static portfolio website built with plain HTML, CSS, and JavaScript.
 
-The site is intentionally simple:
+There is no framework, build tool, server, or database. Netlify can host the site directly from the repository.
 
-- Framework: plain HTML, CSS, and JavaScript
-- Build command: none
-- Publish directory: `.`
-- Environment variables: none
-- Production branch: `main`
+## Local Preview
 
-Netlify should be used only for hosting and deployment. GitHub is the source of truth.
-
-## How to Run Locally
-
-Open `index.html` in a browser.
+The simplest way is to open `index.html` in a browser.
 
 Optional local server:
 
@@ -28,58 +20,34 @@ Then open:
 http://127.0.0.1:4173
 ```
 
-## How to Make Future Updates
+## How to Update Content
 
-For normal updates, do not edit `main` directly.
+Most routine edits happen in `projects.js`.
 
-1. Create a new branch from `main`.
-2. Edit the website content.
-3. Open a pull request.
-4. Review the Netlify deploy preview.
-5. Merge the pull request when the preview looks correct.
-6. Netlify deploys production automatically from `main`.
+- Update `portfolioData.profile` for headline, contact details, and summary.
+- Update `portfolioData.projects` to add, remove, or reorder projects.
+- Project images and the downloadable CV are currently embedded in `projects.js` / `styles.css` as optimized data links so GitHub and Netlify can deploy without separate binary uploads.
+- To replace the CV or project images, ask Codex to update them from the source files.
+- For each project, keep `summary`, `role`, `quickScan`, `metrics`, `facts`, `caseStudy`, and `tools` complete.
+- The `caseStudy` object controls the detailed popup content: challenge, contribution, design decisions, deliverables, validation, and outcome.
 
-## Where to Edit
+## Netlify Settings
 
-Because this is a compact static site, the main content is currently in `index.html`.
-
-Common edits:
-
-- Project text: project data inside the `<script>` section of `index.html`
-- Styling: the `<style>` section of `index.html`
-- Contact links: the contact section near the bottom of `index.html`
-- Netlify settings: `netlify.toml`
-
-## GitHub and Netlify Connection
-
-In Netlify:
-
-1. Open the Netlify project.
-2. Go to Project configuration.
-3. Open Build and deploy.
-4. Connect this GitHub repository.
-5. Set production branch to `main`.
-6. Keep deploy previews enabled for pull requests.
-
-After this is connected, do not upload ZIP files to Netlify for normal changes.
-
-## Netlify Build Settings
-
-These are also stored in `netlify.toml`.
+Netlify settings are configured in `netlify.toml`.
 
 - Build command: leave empty
 - Publish directory: `.`
-- Production branch: `main`
 - Environment variables: none required
+- Production branch: `main`
 
-## Review Checklist
+## GitHub to Netlify Workflow
 
-Before merging a pull request:
+Use GitHub as the source of truth. Netlify should deploy automatically from GitHub.
 
-- Homepage opens
-- Search works
-- Category filters work
-- Project case studies expand
-- Contact links work
-- Netlify deploy preview looks correct on desktop and mobile
-- GitHub checks pass
+1. Make updates in a new branch, not directly on `main`.
+2. Open a pull request.
+3. Review the Netlify deploy preview.
+4. Merge the pull request when it looks correct.
+5. Netlify deploys production from `main`.
+
+More detail is in `docs/github-netlify-workflow.md`.
