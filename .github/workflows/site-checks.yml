@@ -9,12 +9,48 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Check static files
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check JavaScript syntax
         run: |
-          test -f index.html
-          test -f netlify.toml
-          grep -q "Project portfolio" index.html
-          grep -q "publish = \".\"" netlify.toml
+          node --check projects.js
+          node --check script.js
+
+      - name: Check project data and assets
+        run: |
+          node - <<'NODE'
+          const fs = require("fs");
+          const vm = require("vm");
+          const source = fs.readFileSync("projects.js", "utf8");
+          const data = vm.runInNewContext(`${source}; portfolioData`);
+
+          if (!Array.isArray(data.projects) || data.projects.length === 0) {
+            throw new Error("No projects found in projects.js");
+          }
+
+          if (!Array.isArray(data.downloads) || data.downloads.length !== 1) {
+            throw new Error("Expected exactly one download: the CV");
+          }
+
+          for (const project of data.projects) {
+            if (!project.image.startsWith("data:image/") && !fs.existsSync(project.image)) {
+              throw new Error(`Missing project image: ${project.image}`);
+            }
+          }
+
+          for (const download of data.downloads) {
+            if (!download.href.startsWith("data:application/pdf") && !fs.existsSync(download.href)) {
+              throw new Error(`Missing download file: ${download.href}`);
+            }
+          }
+
+          console.log(`Checked ${data.projects.length} projects and ${data.downloads.length} downloads.`);
+          NODE
