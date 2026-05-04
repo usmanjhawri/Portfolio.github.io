@@ -13,6 +13,8 @@ const featuredProject = document.querySelector("#featuredProject");
 const projectSearch = document.querySelector("#projectSearch");
 const projectCount = document.querySelector("#projectCount");
 const emptyState = document.querySelector("#emptyState");
+const credentialGrid = document.querySelector("#credentialGrid");
+const skillsGrid = document.querySelector("#skillsGrid");
 
 let activeFilter = "all";
 let searchTerm = "";
@@ -50,6 +52,35 @@ function renderStats() {
         <article class="stat-item">
           <strong>${escapeHtml(stat.value)}</strong>
           <span>${escapeHtml(stat.label)}</span>
+        </article>
+      `
+    )
+    .join("");
+}
+
+function renderSkills() {
+  credentialGrid.innerHTML = portfolioData.certifications
+    .map(
+      (certification) => `
+        <article class="credential-card">
+          <strong>${escapeHtml(certification.name)}</strong>
+          <div>
+            <h3>${escapeHtml(certification.label)}</h3>
+            <p>${escapeHtml(certification.detail)}</p>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+
+  skillsGrid.innerHTML = portfolioData.skillGroups
+    .map(
+      (group) => `
+        <article class="skill-card">
+          <h3>${escapeHtml(group.title)}</h3>
+          <div class="skill-list">
+            ${group.items.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+          </div>
         </article>
       `
     )
@@ -315,6 +346,7 @@ dialog.addEventListener("click", (event) => {
 renderDownloads();
 renderProfileProof();
 renderStats();
+renderSkills();
 renderProcess();
 renderFeaturedProject();
 renderFilters();
