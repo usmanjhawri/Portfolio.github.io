@@ -58,7 +58,7 @@ The pull request also uses `.github/pull_request_template.md` so every change in
 - Styling and layout: `styles.css`
 - Interactions such as search and popups: `script.js`
 - Project image data: `image-data/`
-- CV download data: `cv-data/`
+- CV download data: `cv-data/cv.js`
 
 Most routine updates should be made in `projects.js`.
 
