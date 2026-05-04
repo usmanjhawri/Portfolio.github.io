@@ -27,22 +27,29 @@ const copyDir = (from, to) => {
   }
 };
 
+const registerLocalProjectImages = (localImageDir) => {
+  if (!fs.existsSync(localImageDir)) return false;
+
+  const imageFiles = fs.readdirSync(localImageDir)
+    .filter((file) => /\.(jpe?g|png|webp)$/i.test(file));
+  if (imageFiles.length === 0) return false;
+
+  copyDir(localImageDir, imageOutputDir);
+  for (const file of imageFiles) {
+    const id = file.replace(/\.(jpe?g|png|webp)$/i, "");
+    generatedImagePaths.set(id, `assets/project-images/site/${file}`);
+  }
+  return true;
+};
+
 const decodeProjectImages = () => {
+  const localImageDir = path.join(root, "assets", "project-images", "site");
   const sourceDir = path.join(root, "image-data");
   fs.mkdirSync(imageOutputDir, { recursive: true });
 
+  if (registerLocalProjectImages(localImageDir)) return;
   if (!fs.existsSync(sourceDir)) {
-    const localImageDir = path.join(root, "assets", "project-images", "site");
-    copyDir(localImageDir, imageOutputDir);
-    for (const file of fs.readdirSync(localImageDir)) {
-      if (file.endsWith(".jpg")) {
-        const id = file.replace(/\.jpg$/, "");
-        const outputName = `${id}.webp`;
-        copyFile(path.join(localImageDir, file), path.join(imageOutputDir, outputName));
-        generatedImagePaths.set(id, `assets/project-images/site/${outputName}`);
-      }
-    }
-    return;
+    throw new Error("No project image source found.");
   }
 
   const extensionByMime = {
@@ -152,8 +159,7 @@ const buildProjectData = () => {
   for (const [id, imagePath] of generatedImagePaths) {
     const imageExpression = new RegExp(`image:\\s*window\\.projectImages\\["${id}"\\]`, "g");
     source = source.replace(imageExpression, `image: "${imagePath}"`);
-    source = source.replace(new RegExp(`assets/project-images/site/${id}\\.svg`, "g"), imagePath);
-    source = source.replace(new RegExp(`assets/project-images/site/${id}\\.jpg`, "g"), imagePath);
+    source = source.replace(new RegExp(`assets/project-images/site/${id}\\.(svg|jpe?g|png|webp)`, "g"), imagePath);
   }
   source = source.replace(
     /href:\s*"data:application\/pdf;base64,"\s*\+\s*window\.cvChunks\.join\(""\)/g,
