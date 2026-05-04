@@ -23,27 +23,18 @@ jobs:
         run: |
           node --check projects.js
           node --check script.js
-          find image-data cv-data -name "*.js" -print0 | xargs -0 -n1 node --check
+          node --check scripts/build-site.js
+
+      - name: Build static site
+        run: node scripts/build-site.js
 
       - name: Check project data and assets
         run: |
           node - <<'NODE'
           const fs = require("fs");
           const vm = require("vm");
-          const context = { window: {} };
-
-          for (const file of fs.readdirSync("image-data").map((name) => `image-data/${name}`)) {
-            vm.runInNewContext(fs.readFileSync(file, "utf8"), context);
-          }
-
-          for (const file of fs.readdirSync("cv-data").map((name) => `cv-data/${name}`)) {
-            vm.runInNewContext(fs.readFileSync(file, "utf8"), context);
-          }
-
-          context.projectImages = context.window.projectImages;
-          context.cvChunks = context.window.cvChunks;
-          const source = fs.readFileSync("projects.js", "utf8");
-          const data = vm.runInNewContext(`${source}; portfolioData`, context);
+          const source = fs.readFileSync("dist/projects.js", "utf8");
+          const data = vm.runInNewContext(`${source}; portfolioData`);
 
           if (!Array.isArray(data.projects) || data.projects.length === 0) {
             throw new Error("No projects found in projects.js");
@@ -54,13 +45,13 @@ jobs:
           }
 
           for (const project of data.projects) {
-            if (!project.image.startsWith("data:image/") && !fs.existsSync(project.image)) {
+            if (!fs.existsSync(`dist/${project.image}`)) {
               throw new Error(`Missing project image: ${project.image}`);
             }
           }
 
           for (const download of data.downloads) {
-            if (!download.href.startsWith("data:application/pdf") && !fs.existsSync(download.href)) {
+            if (!fs.existsSync(`dist/${download.href}`)) {
               throw new Error(`Missing download file: ${download.href}`);
             }
           }

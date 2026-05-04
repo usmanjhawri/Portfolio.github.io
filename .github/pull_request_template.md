@@ -8,14 +8,15 @@
 
 ## How It Was Tested
 
-- [ ] Opened the site locally or reviewed Netlify preview
+- [ ] Opened the site locally
 - [ ] Checked project search and filters
-- [ ] Opened at least one project case study
-- [ ] Checked contact links
+- [ ] Opened at least one project case study popup
+- [ ] Checked the CV download link
+- [ ] Reviewed the Netlify deploy preview
 
 ## Netlify Setup Notes
 
-- Build command: leave empty
-- Publish directory: `.`
+- Build command: `node scripts/build-site.js`
+- Publish directory: `dist`
 - Production branch: `main`
 - Environment variables: none required
