@@ -1,6 +1,6 @@
 # GitHub and Netlify Workflow
 
-This website is a plain static site. It uses HTML, CSS, JavaScript, images, and a CV download. There is no React, Next.js, Vite, Astro, database, or server.
+This website is a plain static site. It uses HTML, CSS, JavaScript, project image data, and a CV download. There is no React, Next.js, Vite, Astro, database, or server.
 
 ## Netlify Build Settings
 
@@ -46,8 +46,8 @@ GitHub runs a small check on every pull request using `.github/workflows/site-ch
 It checks:
 
 - JavaScript syntax
-- Project image paths
-- CV download path
+- Project image data
+- CV download data
 
 The pull request also uses `.github/pull_request_template.md` so every change includes a summary, files changed, testing notes, and Netlify setup notes.
 
@@ -57,7 +57,8 @@ The pull request also uses `.github/pull_request_template.md` so every change in
 - Project content: `projects.js`
 - Styling and layout: `styles.css`
 - Interactions such as search and popups: `script.js`
-- Project images and CV download data: `projects.js` and `styles.css`
+- Project image data: `image-data/`
+- CV download data: `cv-data/`
 
 Most routine updates should be made in `projects.js`.
 
