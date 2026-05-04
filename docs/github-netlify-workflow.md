@@ -1,47 +1,93 @@
 # GitHub and Netlify Workflow
 
-This website is a plain static site. It does not use React, Next.js, Vite, Astro, Jekyll, a database, or a server.
+This website is a plain static site. It uses HTML, CSS, JavaScript, project image data, and a CV download. There is no React, Next.js, Vite, Astro, database, or server.
 
 ## Netlify Build Settings
+
+These settings are stored in `netlify.toml`.
 
 - Build command: leave empty
 - Publish directory: `.`
 - Environment variables: none required
 - Production branch: `main`
 
-These settings are saved in `netlify.toml`.
+Because the site is plain HTML/CSS/JS, Netlify only needs to copy the files and host them.
 
-## How the Workflow Works
+## How GitHub Connects to Netlify
 
-GitHub stores the website code. Netlify hosts the website.
+1. Create or open the GitHub repository for this portfolio.
+2. In Netlify, open the project.
+3. Go to **Project configuration**.
+4. Open **Build and deploy**.
+5. Connect the site to the GitHub repository.
+6. Set the production branch to `main`.
+7. Keep deploy previews enabled for pull requests.
 
-When a pull request is opened, Netlify creates a deploy preview. This preview lets you check the website before it becomes public.
-
-When the pull request is merged into `main`, Netlify updates the public production website automatically.
+After this, do not upload ZIP files for normal updates. Push changes to GitHub instead.
 
 ## Safe Update Flow
 
-1. Make changes in a new branch.
-2. Open a pull request.
-3. Review the Netlify deploy preview.
-4. Merge only after the preview looks right.
-5. Production deploys from `main`.
+Use this flow for every future website change.
 
-Do not edit `main` directly for normal updates.
+1. Create a new branch from `main`.
+2. Make the website update on that branch.
+3. Open a pull request.
+4. Netlify creates a deploy preview for the pull request.
+5. Review the preview link.
+6. Merge the pull request only when the preview looks correct.
+7. Netlify deploys production automatically from `main`.
 
-## What You Need to Do in Netlify Once
+Production should only deploy from `main`.
 
-1. Open your Netlify project.
-2. Go to Project configuration.
-3. Open Build and deploy.
-4. Connect this GitHub repository: `usmanjhawri/Portfolio.github.io`.
-5. Set production branch to `main`.
-6. Leave build command empty.
-7. Set publish directory to `.`.
-8. Keep deploy previews enabled.
+## Pull Request Checks
 
-After that, updates should happen through GitHub pull requests, not ZIP uploads.
+GitHub runs a small check on every pull request using `.github/workflows/site-checks.yml`.
 
-## For Muhammad
+It checks:
 
-You do not need to understand the code to maintain the workflow. Ask for an update, review the Netlify preview link, and approve the merge when it looks good.
+- JavaScript syntax
+- Project image data
+- CV download data
+
+The pull request also uses `.github/pull_request_template.md` so every change includes a summary, files changed, testing notes, and Netlify setup notes.
+
+## What to Edit
+
+- Main page structure: `index.html`
+- Project content: `projects.js`
+- Styling and layout: `styles.css`
+- Interactions such as search and popups: `script.js`
+- Project image data: `image-data/`
+- CV download data: `cv-data/cv.js`
+
+Most routine updates should be made in `projects.js`.
+
+## Local Preview
+
+The simplest way:
+
+1. Open `index.html` in your browser.
+2. Check the page visually.
+3. Click project cards and test search/filtering.
+
+Optional local server:
+
+```bash
+python -m http.server 4173
+```
+
+Then open:
+
+```text
+http://127.0.0.1:4173
+```
+
+## Review Checklist Before Merging
+
+- The homepage opens.
+- Project images load.
+- Search and filters work.
+- Project popups open and close.
+- The CV download button works.
+- The Netlify deploy preview looks correct on desktop and mobile.
+- The GitHub checks pass.
