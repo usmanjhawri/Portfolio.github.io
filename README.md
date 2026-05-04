@@ -27,7 +27,7 @@ Most routine edits happen in `projects.js`.
 - Update `portfolioData.profile` for headline, contact details, and summary.
 - Update `portfolioData.projects` to add, remove, or reorder projects.
 - Project image data is kept in `image-data/`.
-- CV download data is kept in `cv-data/`. The website offers only the CV as a download.
+- CV download data is kept in `cv-data/cv.js`. The website offers only the CV as a download.
 - To replace the CV or project images, ask Codex to update them from the source files.
 - For each project, keep `summary`, `role`, `quickScan`, `metrics`, `facts`, `caseStudy`, and `tools` complete.
 - The `caseStudy` object controls the detailed popup content: challenge, contribution, design decisions, deliverables, validation, and outcome.
